@@ -4,13 +4,14 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
+import static Common.BaseURI.API_KEY;
 import static Common.BaseURI.baseURL;
 import static PayloadBuilder.WeatherPayload.RegisterStation;
 import static org.hamcrest.Matchers.equalTo;
 
 public class WeatherApiRequestBuilder {
 
-    static String API_KEY = "637564ac19c682d801b190268d429993";
+
     static String StationID ;
 
     public static Response PostCreateStationResponse(String external_id, String name,float latitude,float longitude,int altitude){
@@ -25,7 +26,7 @@ public class WeatherApiRequestBuilder {
                 .post()
                 .then()
                 .extract().response();
-       StationID =response.jsonPath().getString("ID");
+                StationID =response.jsonPath().getString("ID");
 
         return response;
     }
